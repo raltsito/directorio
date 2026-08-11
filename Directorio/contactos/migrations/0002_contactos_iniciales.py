@@ -7,6 +7,7 @@ admin nunca se sobrescriben en un redeploy.
 import json
 from pathlib import Path
 
+from django.core.management.color import no_style
 from django.db import migrations
 
 FIXTURE = (
@@ -29,8 +30,10 @@ def cargar_contactos(apps, schema_editor):
     )
 
     # bulk_create con pk explicito no avanza la secuencia en Postgres.
+    # El estilo es obligatorio: el backend de Postgres lo usa para colorear el
+    # SQL, y pasar None revienta con AttributeError.
     conexion = schema_editor.connection
-    sentencias = conexion.ops.sequence_reset_sql(None, [Contacto])
+    sentencias = conexion.ops.sequence_reset_sql(no_style(), [Contacto])
 
     if sentencias:
         with conexion.cursor() as cursor:
