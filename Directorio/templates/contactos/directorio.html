@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Directorio de Contactos - Interactivo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* VARIABLES DE TEMA CLARO (Predeterminado) */
+      :root {
+        --bg-body: #f8fafc;
+        --bg-card: #ffffff;
+        --bg-control: #ffffff;
+        --bg-pill: #f1f5f9;
+        --bg-pill-hover: #e2e8f0;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --border-color: #e2e8f0;
+        --table-header-bg: #f8fafc;
+        --table-row-hover: #f1f5f9;
+        --primary: #116dff;
+        --primary-light: #eaf2ff;
+        --radius-lg: 16px;
+        --radius-md: 10px;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+        --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      /* DETECCIÓN AUTOMÁTICA DE MODO OSCURO EN CUALQUIER DISPOSITIVO */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg-body: #0f172a;
+          --bg-card: #1e293b;
+          --bg-control: #1e293b;
+          --bg-pill: #334155;
+          --bg-pill-hover: #475569;
+          --text-main: #f8fafc;
+          --text-muted: #94a3b8;
+          --border-color: #334155;
+          --table-header-bg: #1e293b;
+          --table-row-hover: #334155;
+          --primary: #3b82f6;
+          --primary-light: rgba(59, 130, 246, 0.15);
+          --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+          --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        transition:
+          background-color 0.2s,
+          border-color 0.2s,
+          color 0.2s;
+      }
+
+      body {
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .container {
+        max-width: 1140px;
+        width: 100%;
+      }
+
+      /* HEADER */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .header-title h1 {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+
+      .header-title p {
+        color: var(--text-muted);
+        font-size: 14px;
+        margin-top: 4px;
+      }
+
+      .header-stats {
+        display: flex;
+        gap: 12px;
+        font-size: 13px;
+        color: var(--text-muted);
+        background: var(--bg-card);
+        padding: 8px 16px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+      }
+
+      .header-stats strong {
+        color: var(--text-main);
+      }
+
+      /* CONTROLES Y FILTROS */
+      .controls {
+        background: var(--bg-control);
+        padding: 16px;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border-color);
+        margin-bottom: 24px;
+      }
+
+      .search-bar-wrapper {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .search-input {
+        flex: 1;
+        padding: 12px 16px;
+        background: var(--bg-body);
+        color: var(--text-main);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        font-size: 14px;
+        outline: none;
+      }
+
+      .search-input:focus {
+        border-color: var(--primary);
+      }
+
+      .view-toggle {
+        display: flex;
+        background: var(--bg-pill);
+        padding: 4px;
+        border-radius: var(--radius-md);
+      }
+
+      .btn-toggle {
+        border: none;
+        background: transparent;
+        padding: 8px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        color: var(--text-muted);
+      }
+
+      .btn-toggle.active {
+        background: var(--bg-card);
+        color: var(--primary);
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* PILLS DE FILTRADO */
+      .filter-pills {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .pill {
+        background: var(--bg-pill);
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-muted);
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      .pill:hover {
+        background: var(--bg-pill-hover);
+      }
+
+      .pill.active {
+        background: var(--primary);
+        color: #ffffff;
+      }
+
+      .results-count {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        letter-spacing: 0.5px;
+      }
+
+      /* SECCIONES Y GRID DE TARJETAS */
+      .dept-section {
+        margin-bottom: 32px;
+      }
+
+      .dept-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .dept-badge {
+        background: var(--primary-light);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 12px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+      }
+
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), #60a5fa);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .card-name {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .card-role {
+        font-size: 13px;
+        color: var(--primary);
+        font-weight: 500;
+        margin-bottom: 16px;
+      }
+
+      .card-info {
+        width: 100%;
+        border-top: 1px solid var(--border-color);
+        padding-top: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--text-muted);
+      }
+
+      .location-tag {
+        display: inline-block;
+        margin-top: 8px;
+        background: var(--bg-pill);
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 6px;
+        color: var(--text-main);
+      }
+
+      /* ESTILOS DE MODO LISTA (TABLA) */
+      .table-container {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        overflow-x: auto;
+        box-shadow: var(--shadow-sm);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 13px;
+      }
+
+      th {
+        background: var(--table-header-bg);
+        padding: 14px 16px;
+        color: var(--text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      td {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-main);
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      tr:hover td {
+        background: var(--table-row-hover);
+      }
+
+      .badge-dept {
+        background: var(--bg-pill);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-title">
+          <h1>Directorio de Contactos</h1>
+          <p>
+            Instituto de Atencion Integral y Desarrollo Humano A.C. — Directorio
+            Interno
+          </p>
+        </div>
+        <div class="header-stats">
+          <span><strong id="total-colab">0</strong> colaboradores</span>
+          <span>•</span>
+          <span><strong id="total-dept">0</strong> departamentos</span>
+        </div>
+      </header>
+
+      <!-- Controles -->
+      <div class="controls">
+        <div class="search-bar-wrapper">
+          <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="Buscar por nombre, rol, email..."
+          />
+          <div class="view-toggle">
+            <button
+              id="btn-grid"
+              class="btn-toggle active"
+              onclick="setView('grid')"
+            >
+              GRID
+            </button>
+            <button id="btn-list" class="btn-toggle" onclick="setView('list')">
+              LISTA
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-pills" id="pills-container">
+          <!-- Los botones de departamentos se generan dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Contador de Resultados -->
+      <div class="results-count" id="results-count">0 RESULTADOS</div>
+
+      <!-- Contenedor Principal donde se inyecta la información -->
+      <main id="directory-content"></main>
+    </div>
+
+    <script id="contacts-data" type="application/json">
+      {{ contactos_json|safe }}
+    </script>
+
+    <script>
+      // DATOS DE CONTACTOS
+      const contacts = JSON.parse(
+        document.getElementById("contacts-data").textContent,
+      );
+
+      let currentView = "grid";
+      let currentDept = "TODOS";
+      let searchQuery = "";
+
+      // INICIALIZACIÓN
+      document.addEventListener("DOMContentLoaded", () => {
+        initFilterPills();
+        updateStats();
+        renderDirectory();
+
+        document
+          .getElementById("search-input")
+          .addEventListener("input", (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            renderDirectory();
+          });
+      });
+
+      // GENERA LOS BOTONES DE FILTRO
+      function initFilterPills() {
+        const departments = ["TODOS", ...new Set(contacts.map((c) => c.dept))];
+        const pillsContainer = document.getElementById("pills-container");
+
+        pillsContainer.innerHTML = departments
+          .map(
+            (dept) => `
+        <button class="pill ${dept === currentDept ? "active" : ""}" onclick="setDepartment('${dept}')">
+          ${dept}
+        </button>
+      `,
+          )
+          .join("");
+      }
+
+      // CAMBIAR DEPARTAMENTO
+      function setDepartment(dept) {
+        currentDept = dept;
+        initFilterPills();
+        renderDirectory();
+      }
+
+      // CAMBIAR MODO DE VISTA (GRID / LISTA)
+      function setView(view) {
+        currentView = view;
+        document
+          .getElementById("btn-grid")
+          .classList.toggle("active", view === "grid");
+        document
+          .getElementById("btn-list")
+          .classList.toggle("active", view === "list");
+        renderDirectory();
+      }
+
+      // ESTADÍSTICAS EN CABECERA
+      function updateStats() {
+        document.getElementById("total-colab").textContent = contacts.length;
+        document.getElementById("total-dept").textContent = new Set(
+          contacts.map((c) => c.dept),
+        ).size;
+      }
+
+      // OBTENER FILTRADO DE CONTACTOS
+      function getFilteredContacts() {
+        return contacts.filter((item) => {
+          const matchesDept =
+            currentDept === "TODOS" || item.dept === currentDept;
+          const matchesSearch =
+            item.name.toLowerCase().includes(searchQuery) ||
+            item.role.toLowerCase().includes(searchQuery) ||
+            item.email.toLowerCase().includes(searchQuery) ||
+            item.city.toLowerCase().includes(searchQuery);
+          return matchesDept && matchesSearch;
+        });
+      }
+
+      // RENDERIZAR DIRECTORIO
+      function renderDirectory() {
+        const filtered = getFilteredContacts();
+        const content = document.getElementById("directory-content");
+        document.getElementById("results-count").textContent =
+          `${filtered.length} RESULTADOS`;
+
+        if (filtered.length === 0) {
+          content.innerHTML = `<p style="text-align: center; color: var(--text-muted); padding: 40px;">No se encontraron colaboradores.</p>`;
+          return;
+        }
+
+        if (currentView === "grid") {
+          renderGridView(filtered, content);
+        } else {
+          renderListView(filtered, content);
+        }
+      }
+
+      // DIBUJAR VISTA DE TARJETAS (GRID)
+      function renderGridView(filtered, container) {
+        // Agrupar por departamento
+        const grouped = filtered.reduce((acc, contact) => {
+          acc[contact.dept] = acc[contact.dept] || [];
+          acc[contact.dept].push(contact);
+          return acc;
+        }, {});
+
+        let html = "";
+        for (const [dept, members] of Object.entries(grouped)) {
+          html += `
+          <section class="dept-section">
+            <div class="dept-title">
+              ${dept}
+              <span class="dept-badge">${members.length} personas</span>
+            </div>
+            <div class="grid">
+              ${members
+                .map(
+                  (c) => `
+                <div class="card">
+                  <div class="avatar">${getInitials(c.name)}</div>
+                  <div class="card-name">${c.name}</div>
+                  <div class="card-role">${c.role}</div>
+                  <div class="card-info">
+                    <div>✉ ${c.email}</div>
+                    <div>📞 ${c.phone}</div>
+                    <div><span class="location-tag">${c.city}</span></div>
+                  </div>
+                </div>
+              `,
+                )
+                .join("")}
+            </div>
+          </section>
+        `;
+        }
+        container.innerHTML = html;
+      }
+
+      // DIBUJAR VISTA DE TABLA (LISTA)
+      function renderListView(filtered, container) {
+        container.innerHTML = `
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Departamento</th>
+                <th>Cargo</th>
+                <th>Correo Electrónico</th>
+                <th>Teléfono</th>
+                <th>Ext.</th>
+                <th>Sede</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filtered
+                .map(
+                  (c) => `
+                <tr>
+                  <td><strong>${c.name}</strong></td>
+                  <td><span class="badge-dept">${c.dept}</span></td>
+                  <td>${c.role}</td>
+                  <td>${c.email}</td>
+                  <td>${c.phone}</td>
+                  <td><strong>${c.ext}</strong></td>
+                  <td>${c.city}</td>
+                </tr>
+              `,
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+      }
+
+      // OBTENER INICIALES PARA EL AVATAR
+      function getInitials(name) {
+        return name
+          .split(" ")
+          .map((n) => n[0])
+          .slice(0, 2)
+          .join("");
+      }
+    </script>
+  </body>
+</html>
