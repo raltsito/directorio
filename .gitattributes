@@ -1,0 +1,6 @@
+# Los scripts que ejecuta Railway (Linux) deben quedar siempre con LF.
+*.sh text eol=lf
+Procfile text eol=lf
+*.py text eol=lf
+*.json text eol=lf
+*.txt text eol=lf

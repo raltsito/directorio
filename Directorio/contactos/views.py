@@ -1,8 +1,21 @@
 from django.shortcuts import render
 from django.core.serializers.json import DjangoJSONEncoder
+from django.db import connection
+from django.http import JsonResponse
 import json
 
 from .models import Contacto
+
+
+def healthz(request):
+    """Healthcheck de Railway: confirma que la app responde y la BD contesta."""
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT 1")
+
+        return JsonResponse({"status": "ok"})
+    except Exception as error:
+        return JsonResponse({"status": "error", "detail": str(error)}, status=503)
 
 
 def directorio(request):

@@ -1,0 +1,226 @@
+[
+  {
+    "model": "contactos.contacto",
+    "pk": 1,
+    "fields": {
+      "nombre": "Javier Enrique Martínez Becerra",
+      "departamento": "Dirección General",
+      "cargo": "Director General",
+      "correo": "javier@grupointra.com",
+      "telefono": "+52 844 332 0494",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 2,
+    "fields": {
+      "nombre": "Fernando Cortez Flores",
+      "departamento": "Comercial",
+      "cargo": "Dirección Comercial",
+      "correo": "fernandocortez@grupointra.mx",
+      "telefono": "+52 811 822 6008",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 3,
+    "fields": {
+      "nombre": "Miriam Venegas Martinez",
+      "departamento": "Recursos Humanos",
+      "cargo": "Responsable de Proyectos y Vinculación",
+      "correo": "miriam@intra.org.mx",
+      "telefono": "+52 844 293 7150",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 4,
+    "fields": {
+      "nombre": "Nancy Elizabeth Camacho Sanchez",
+      "departamento": "Recursos Humanos",
+      "cargo": "Generalista de Recursos Humanos",
+      "correo": "nancye@collaboracali.com",
+      "telefono": "+52 844 292 6101",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 5,
+    "fields": {
+      "nombre": "Carlos Alberto Gonzalez Becerra",
+      "departamento": "Sistemas",
+      "cargo": "Encargado de Sistemas",
+      "correo": "Carlosbecerra@grupointra.mx",
+      "telefono": "+52 844 586 0246",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 6,
+    "fields": {
+      "nombre": "Rocio del Carmen Medina Cardoza",
+      "departamento": "Sistemas",
+      "cargo": "Desarrollo de Software",
+      "correo": "Sistemas1@intra.mx",
+      "telefono": "+52 871 189 0712",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 7,
+    "fields": {
+      "nombre": "Jazmin Guadalupe Ibarra Alvarez",
+      "departamento": "Sistemas",
+      "cargo": "Desarrollo de Software",
+      "correo": "Sistemas2@intra.org.mx",
+      "telefono": "+52 844 893 8279",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 8,
+    "fields": {
+      "nombre": "Karen Abigaíl Ramírez López",
+      "departamento": "Sistemas",
+      "cargo": "Soporte Técnico",
+      "correo": "Sistemas0@intra.org.mx",
+      "telefono": "+52 844 534 3162",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 9,
+    "fields": {
+      "nombre": "Adrián Alberto Gallegos Valdes",
+      "departamento": "Academia",
+      "cargo": "Control escolar",
+      "correo": "controlescolar@academia.intra.org.mx",
+      "telefono": "+52 844 767 7853",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 10,
+    "fields": {
+      "nombre": "Luis Jesus Salazar Alvarez",
+      "departamento": "Finanzas",
+      "cargo": "Encargado de Finanzas",
+      "correo": "Jesus.salazar@academia.intra.org.mx",
+      "telefono": "+52 844 455 5900",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 11,
+    "fields": {
+      "nombre": "Jennifer Avril Ávila Cruz",
+      "departamento": "Marketing",
+      "cargo": "Practicante de Psicología",
+      "correo": "jennaf463@icloud.com",
+      "telefono": "+52 844 218 7613",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 12,
+    "fields": {
+      "nombre": "Valeria Guadalupe Pedroza Ibarra",
+      "departamento": "Recepción",
+      "cargo": "Recepcionista",
+      "correo": "c.184valeria@gmail.com",
+      "telefono": "+52 844 225 2102",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 13,
+    "fields": {
+      "nombre": "Misty Daniela Almendariz Martínez",
+      "departamento": "Recepción",
+      "cargo": "Recepcionista",
+      "correo": "Misty@academia.org.mx",
+      "telefono": "+52 844 385 4811",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  },
+  {
+    "model": "contactos.contacto",
+    "pk": 14,
+    "fields": {
+      "nombre": "Daniela Huerta",
+      "departamento": "Marketing",
+      "cargo": "Coordinadora de Marketing",
+      "correo": "daniela-mkt@grupointra.mx",
+      "telefono": "+52 877 140 4918",
+      "extension": null,
+      "ciudad": "Saltillo",
+      "activo": true,
+      "fecha_ingreso": null,
+      "fecha_baja": null
+    }
+  }
+]
